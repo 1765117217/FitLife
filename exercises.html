@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+  <!-- Bootstrap 5 + jQuery -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- 你的样式 -->
+  <link rel="stylesheet" href="assets/css/ui.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/dark-theme.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+
+
+  <style>
+    .exercise-card img{ object-fit: cover; height: 180px; width:100%; }
+    .tag{ font-size: .75rem; }
+    .badge-learned{ position: absolute; top: .75rem; right: .75rem; }
+    .progress-chip{ font-weight: 600; }
+    .filter-btns .btn{ margin-right:.5rem; margin-bottom:.5rem; }
+  </style>
+</head>
+<body data-page="exercises"> 
+<!-- 顶部导航 -->
+<header class="navbar-elite sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+    <span class="fw-bold tracking-wide" style="
+  font-family:'Montserrat',sans-serif;
+  font-size:1.7rem;
+  font-weight:900;
+  color:#d4af37;
+  text-shadow:1px 1px 2px #000,0 0 12px rgba(212,175,55,.6);
+  letter-spacing:.8px;
+">
+  FitLife
+</span>
+
+
+
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link elite-link px-2" href="exercises.html">Exercises</a></li>
+          <li class="nav-item"><a class="nav-link elite-link px-2" href="equipment.html">Equipment</a></li>
+          <li class="nav-item"><a class="nav-link elite-link px-2" href="features.html">Features</a></li>
+          <li class="nav-item"><a class="nav-link elite-link px-2" href="nutrition.html">Nutrition</a></li>
+          <li class="nav-item"><a class="nav-link elite-link px-2" href="contact.html">Contact</a></li>
+
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- 金属质感分隔线 -->
+  <div class="elite-sep"></div>
+</header>
+
+
+  <!-- 页头 Banner -->
+  <section class="bg-light">
+    <div class="container py-4">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-6 fw-bold mb-3">Exercise Library</h1>
+          <p class="text-muted mb-0">
+          </p>
+        </div>
+        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+          <span class="badge text-bg-primary p-3 progress-chip">
+            Learned: <span id="learnedCount">0</span>/<span id="totalCount">0</span>
+          </span>
+          <button id="resetProgress" class="btn btn-outline-secondary ms-2">Reset Progress</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 过滤 / 搜索 -->
+  <section class="border-top">
+    <div class="container py-3">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-8">
+          <div class="filter-btns">
+            <button class="btn btn-sm btn-outline-primary filter" data-group="all">All</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Chest">Chest</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Back">Back</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Legs">Legs</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Shoulders">Shoulders</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Core">Core</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Cardio">Cardio</button>
+            <button class="btn btn-sm btn-outline-primary filter" data-group="Stretch">Stretch</button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <form class="d-flex" onsubmit="event.preventDefault();">
+            <input id="searchBox" class="form-control" type="search" placeholder="Search exercise name or cues…" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 动作网格 -->
+  <main class="container py-4">
+    <div id="exerciseGrid" class="row g-4">
+      <!-- 深蹲 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Legs Core">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="squat">
+          <img src="assets/css/image/c1.jpg" loading="lazy" class="card-img-top" alt="Squat">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Squat</h5>
+            <p class="mb-2">
+              <span class="badge text-bg-secondary tag me-1">Legs</span>
+              <span class="badge text-bg-secondary tag">Core</span>
+            </p>
+            <p class="card-text small text-muted">
+              Knees track out, neutral spine, slight toe-out. Avoid knee valgus and rounding the back.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="squat">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Squat">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 俯卧撑 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Chest Shoulders Core">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="pushup">
+          <img src="assets/css/image/c2.jpg" loading="lazy" class="card-img-top" alt="Push-up">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Push-up</h5>
+            <p class="mb-2">
+              <span class="badge text-bg-secondary tag me-1">Chest</span>
+              <span class="badge text-bg-secondary tag me-1">Shoulders</span>
+              <span class="badge text-bg-secondary tag">Core</span>
+            </p>
+            <p class="card-text small text-muted">
+              Stable scapulae, elbows ~45°, maintain a straight line. Avoid sagging hips and shrugged shoulders.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="pushup">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Push-up">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 硬拉 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Back Legs Core">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="deadlift">
+          <img src="assets/css/image/c3.jpg" loading="lazy" class="card-img-top" alt="Deadlift">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Deadlift</h5>
+            <p class="mb-2">
+              <span class="badge text-bg-secondary tag me-1">Back</span>
+              <span class="badge text-bg-secondary tag me-1">Legs</span>
+              <span class="badge text-bg-secondary tag">Core</span>
+            </p>
+            <p class="card-text small text-muted">
+              Hip-hinge, neutral spine, bar travels close to shins. Avoid spinal flexion and shrugging.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="deadlift">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Deadlift">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卧推 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Chest Shoulders">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="bench">
+          <img src="assets/css/image/c4.jpg" loading="lazy" class="card-img-top" alt="Bench Press">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Bench Press</h5>
+            <p class="mb-2">
+              <span class="badge text-bg-secondary tag me-1">Chest</span>
+              <span class="badge text-bg-secondary tag">Shoulders</span>
+            </p>
+            <p class="card-text small text-muted">
+              Scapular retraction and depression; consistent bar path. Avoid wrist extension and excessive elbow flare.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="bench">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Bench Press">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 平板支撑 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Core">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="plank">
+          <img src="assets/css/image/c5.jpg" loading="lazy" class="card-img-top" alt="Plank">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Plank</h5>
+            <p class="mb-2"><span class="badge text-bg-secondary tag">Core</span></p>
+            <p class="card-text small text-muted">
+              Brace abs and glutes; keep a straight line; avoid shoulder shrugging and hip drop.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="plank">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Plank">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 慢跑 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Cardio">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="jogging">
+          <img src="assets/css/image/c6.jpg" loading="lazy" class="card-img-top" alt="Jogging">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Jogging</h5>
+            <p class="mb-2"><span class="badge text-bg-secondary tag">Cardio</span></p>
+            <p class="card-text small text-muted">
+              Stay in the endurance HR zone with even cadence; keep breathing rhythm and hydrate.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="jogging">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Jogging">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 髂腰肌拉伸 -->
+      <div class="col-12 col-sm-6 col-lg-4 exercise-card-wrapper" data-groups="Stretch">
+        <div class="card h-100 shadow-sm position-relative exercise-card" data-id="hipflexor">
+          <img src="assets/css/image/c7.jpg" loading="lazy" class="card-img-top" alt="Hip Flexor Stretch">
+          <span class="badge text-bg-success badge-learned d-none">Learned</span>
+          <div class="card-body">
+            <h5 class="card-title mb-1">Hip Flexor Stretch</h5>
+            <p class="mb-2"><span class="badge text-bg-secondary tag">Stretch</span></p>
+            <p class="card-text small text-muted">
+              Neutral pelvis, gently drive hips forward, breathe evenly; avoid lumbar compensation.
+            </p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm mark-btn" data-id="hipflexor">Mark as Learned</button>
+              <button class="btn btn-outline-secondary btn-sm more-btn" data-name="Hip Flexor Stretch">Key Points</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+<!-- 页尾 -->
+<footer class="footer-elite text-white mt-5">
+  <div class="container py-5 text-center">
+
+    <!-- 社交图标 -->
+    <div class="mb-3 d-flex justify-content-center gap-3">
+      <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <!-- 品牌 -->
+    <h5 class="fw-bold mb-3 brand-text">FitLife</h5>
+
+    <!-- 快捷链接 -->
+    <div class="mb-3 small">
+      <a class="footer-link" href="index.html">Home</a> │
+      <a class="footer-link" href="exercises.html">Exercises</a> │
+      <a class="footer-link" href="equipment.html">Equipment</a> │
+      <a class="footer-link" href="features.html">Features</a> │
+      <a class="footer-link" href="nutrition.html">Nutrition</a> │
+      <a class="footer-link" href="contact.html">Contact</a>
+    </div>
+
+    <!-- 版权 -->
+    <div class="small">© 2025 FitLife Reserves All Rights</div>
+  </div>
+
+  <!-- 返回顶部按钮 -->
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+</footer>
+
+  <!-- 页面脚本 -->
+  <script>
+    var EXERCISE_IDS = ["squat","pushup","deadlift","bench","plank","jogging","hipflexor"];
+
+    function getCardById(id){
+      return document.querySelector('.exercise-card[data-id="' + id + '"]');
+    }
+
+    function refreshLearnedView(){
+      var learned = 0;
+      EXERCISE_IDS.forEach(function(id){
+        var seen = sessionStorage.getItem("seen_" + id) === "1";
+        if(seen) learned++;
+        var card = getCardById(id);
+        if(card){
+          var badge = card.querySelector(".badge-learned");
+          if(badge) badge.classList.toggle("d-none", !seen);
+        }
+      });
+      $("#learnedCount").text(learned);
+      $("#totalCount").text(EXERCISE_IDS.length);
+    }
+
+    function markLearned(id){
+      sessionStorage.setItem("seen_" + id, "1");
+      refreshLearnedView();
+    }
+
+    function applyFilter(){
+      var activeGroup = $(".filter.active").data("group") || "all";
+      var kw = ($("#searchBox").val() || "").trim().toLowerCase();
+
+      $(".exercise-card-wrapper").each(function(){
+        var groups = ($(this).data("groups") || "").toString(); // 例如 "Legs Core"
+        var name = $(this).find(".card-title").text().toLowerCase();
+        var text = $(this).find(".card-text").text().toLowerCase();
+
+        var groupOk = (activeGroup === "all") ? true : (groups.indexOf(activeGroup) !== -1);
+        var kwOk = kw ? (name.indexOf(kw) !== -1 || text.indexOf(kw) !== -1 || groups.toLowerCase().indexOf(kw) !== -1) : true;
+
+        $(this).toggle(groupOk && kwOk);
+      });
+    }
+
+    $(function(){
+      // 初始化统计
+      refreshLearnedView();
+
+      // “我已学习”
+      $(".mark-btn").on("click", function(){
+        var id = $(this).data("id");
+        markLearned(id);
+      });
+
+      // “要点”弹窗
+      $(".more-btn").on("click", function(){
+        var name = $(this).data("name") || "This exercise";
+        var msg = [
+          name + ":",
+          "- Keep a neutral spine",
+          "- Drive with the target muscle group",
+          "- Control the eccentric before speeding up",
+          "(Demo alert — you can replace this with a Modal)"
+        ].join("\n");
+        alert(msg);
+      });
+
+      // 过滤按钮
+      $(".filter-btns .filter").on("click", function(){
+        $(".filter-btns .filter").removeClass("active");
+        $(this).addClass("active");
+        applyFilter();
+      });
+      // 默认选中“全部”
+      $('.filter-btns .filter[data-group="all"]').addClass("active");
+
+      // 搜索
+      $("#searchBox").on("input", applyFilter);
+
+      // 重置进度
+      $("#resetProgress").on("click", function(){
+        EXERCISE_IDS.forEach(function(id){
+          sessionStorage.removeItem("seen_" + id);
+        });
+        refreshLearnedView();
+      });
+    });
+  </script>
+ <script src="assets/css/js/common.js"></script>
+<script src="assets/css/js/animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true });</script>
+
+
+</body>
+</html>

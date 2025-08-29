@@ -1,0 +1,231 @@
+
+/* —— 颜色变量 —— */
+:root{
+  --bg: #111;                 /* 页面背景 */
+  --bg-elev: #1a1a1a;         /* 提升层背景（卡片/下拉） */
+  --bg-hover: #191919;
+  --text: #e6e6e6;            /* 主文字 */
+  --muted: #b8b8b8;           /* 次要文字 */
+  --border: rgba(255,255,255,.08);
+  --border-strong: rgba(255,255,255,.12);
+  --gold: #d4af37;            /* 金色点缀 */
+  --gold-soft: #ffe7a3;
+  --accent: #0ea5e9;          /* 蓝青点缀（按钮/链接） */
+}
+
+/* —— 全局 —— */
+html, body{
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* 默认链接颜色微亮 */
+a { color: var(--gold-soft); }
+a:hover { color: #fff; }
+
+/* 细分隔线 */
+hr, .border-top, .border-bottom, .border {
+  border-color: var(--border) !important;
+}
+
+/* —— 顶部导航（ —— */
+.navbar-elite .navbar { background: #000; }
+.navbar-elite .elite-link { color: #d9c88f !important; opacity: .95; }
+.navbar-elite .elite-link:hover,
+.navbar-elite .elite-link.active { color: var(--gold-soft) !important; opacity: 1; }
+.elite-sep { background: linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.25), rgba(255,255,255,.08)); }
+
+/* —— 标题 —— */
+h1, h2, h3, .section-title{
+  background: linear-gradient(90deg, #f9d976, #f39f86);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+h4, h5, h6 { color: #f1f1f1; }
+
+/* —— 卡片 —— */
+.card{
+  background: var(--bg-elev);
+  border-color: var(--border);
+  color: var(--text);
+  box-shadow: none;
+}
+.card-title{ color: var(--gold-soft); }
+.card-text{ color: var(--muted); }
+.card:hover{
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 0 24px rgba(212,175,55,.22);
+}
+
+/* —— 按钮 —— */
+.btn{
+  border-radius: 999px;
+  font-weight: 600;
+  padding: .5rem 1.1rem;
+}
+
+/* 主要按钮 */
+.btn-primary, .btn-gradient{
+  background: linear-gradient(90deg, #ffcc4d, #ffd86b);
+  color: #111;
+  border: 0;
+}
+.btn-primary:hover, .btn-gradient:hover{ filter: brightness(1.06); }
+
+/* 轮廓按钮 */
+.btn-outline-primary{
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.btn-outline-primary:hover{
+  background: var(--gold);
+  color: #111;
+}
+
+/* 购买按钮 */
+.btn-elite{
+  color:#000; border:0;
+  background: linear-gradient(90deg,#fff,#f2f2f2);
+  box-shadow:0 8px 20px rgba(255,255,255,.08), inset 0 0 0 1px rgba(255,255,255,.15);
+}
+.btn-elite:hover{ filter: brightness(1.05); }
+
+/* —— 表单 / 输入框 —— */
+.form-control, .form-select{
+  background: #0f0f0f;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.form-control::placeholder{ color: #8e8e8e; }
+.form-control:focus, .form-select:focus{
+  background: #121212;
+  color: var(--text);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 .25rem rgba(212,175,55,.15);
+}
+.input-group-text{
+  background: #0f0f0f;
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+/* —— 下拉菜单、弹层 —— */
+.dropdown-menu{
+  background: var(--bg-elev);
+  border-color: var(--border);
+}
+.dropdown-item{ color: var(--text); }
+.dropdown-item:hover{ background: var(--bg-hover); }
+
+/* —— 表格 —— */
+.table{
+  color: var(--text);
+  border-color: var(--border);
+}
+.table thead th{
+  color: #fff;
+  background: #121212;
+  border-color: var(--border);
+}
+.table tbody td{
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+/* —— 轮播：加强可读性 —— */
+.carousel-item::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0) 55%);
+  pointer-events: none;
+}
+.carousel-caption{
+  text-shadow: 0 2px 12px rgba(0,0,0,.6);
+}
+
+/* —— 搜索区 —— */
+.form-text{ color: var(--muted) !important; }
+
+/* —— 数据统计区 —— */
+.stats-section{
+  background:#000;
+  color: var(--text);
+}
+.stats-section .stat-number{
+  color: var(--gold-soft);
+  font-weight: 800;
+}
+
+/* —— 页尾 —— */
+footer.bg-dark{ background:#000 !important; }
+.footer-elite{ background:#000; }
+
+/* —— 细节：滚动条 —— */
+::-webkit-scrollbar{ width: 10px; height: 10px; }
+::-webkit-scrollbar-track{ background: #0b0b0b; }
+::-webkit-scrollbar-thumb{ background: #2a2a2a; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover{ background: #333; }
+
+/* —— 无障碍：低动效 —— */
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+
+
+/* ====== 暗黑主题卡片和框体 ====== */
+
+/* 通用卡片 */
+.card,
+.bg-light,
+.border,
+.shadow-sm {
+  background: #1a1a1a !important;      /* 深灰背景 */
+  border: 1px solid rgba(255,255,255,.08) !important;
+  color: #e5e5e5 !important;
+  box-shadow: none !important;         /* 去掉白色阴影 */
+}
+
+/* 卡片标题 */
+.card-title, .h5, h5 {
+  color: #ffd700 !important;           /* 金色标题 */
+}
+
+/* 卡片正文文字 */
+.card-text, .card p, .text-muted {
+  color: #cfcfcf !important;           /* 柔和浅灰文字 */
+}
+
+/* 卡片 hover 发光 */
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 0 20px rgba(212,175,55,.25) !important;
+}
+
+/* 特殊信息块 */
+.info-box, .bg-white {
+  background: #1a1a1a !important;
+  color: #ddd !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+}
+
+/* 全局字体：Poppins 为正文，Montserrat 用于标题 */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 标题更高级 */
+h1, h2, h3, h4, h5, h6,
+.navbar-brand, .section-title, .brand-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+
+/* dark-theme.css 末尾追加：统一暗色卡片 */
+.card, .bg-light, .bg-white {
+  background:#1a1a1a !important;
+  color:#e6e6e6 !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+}

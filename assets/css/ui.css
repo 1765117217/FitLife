@@ -1,0 +1,211 @@
+/* 1) 导航栏下划线动画 */
+.navbar .nav-link {
+  position: relative;
+  padding: .25rem .5rem;
+  transition: color .2s ease;
+}
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+  transition: width .25s ease;
+  border-radius: 2px;
+}
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  width: 100%;
+}
+
+/* 2) 卡片 hover：抬升 + 轻微放大 + 阴影 */
+.card {
+  transition: transform .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+}
+
+/* 3) 按钮渐变 + hover 亮度提升 */
+.btn-gradient {
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 6px 16px rgba(37,99,235,.25);
+}
+.btn-gradient:hover { filter: brightness(1.05); }
+
+/* 4) 图片更安全地居中裁切（首页轮播/卡片图用过的） */
+.fit-cover { object-fit: cover; width: 100%; height: 100%; }
+
+/* 5) 轻量过渡（任何元素加 .soft-anim 都会有细腻过渡） */
+.soft-anim { transition: all .25s ease; }
+
+/* 让每一张轮播“容器”先定高度，图片再100%填满容器 */
+.carousel-item {
+  height: min(75vh, 720px);     /* 桌面端高度：窗口75%或720px取较小值 */
+}
+
+/* 小屏降低高度，避免太高 */
+@media (max-width: 576px) {
+  .carousel-item { height: 380px; }
+}
+
+/* 图片跟随容器等比铺满（不变形，但会裁边）*/
+.hero-img {
+  width: 100%;
+  height: 100%;                 /* 关键：跟随 .carousel-item 的高度 */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 让当前页高亮更明显（配合 nav-link.active） */
+.navbar .nav-link.active { 
+  color: #0d6efd;               /* 或你喜欢的品牌色 */
+}
+
+/* 让轮播文案在浅色图上也清晰一些 */
+.carousel-caption {
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+@media (max-width: 576px) {
+  .carousel-caption { font-size: .95rem; }
+}
+
+/* outline 按钮的悬停态更有反馈 */
+.btn-outline-primary:hover {
+  box-shadow: 0 8px 20px rgba(13,110,253,.25);
+}
+
+/* 低动效用户优雅降级 */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+/* 由 .carousel-item 控制高度，图片100%填满容器 */
+.carousel-item { height: min(75vh, 720px); }
+@media (max-width: 576px) { .carousel-item { height: 380px; } }
+
+/* 直接作用到 carousel 里的默认 img class */
+.carousel-item > img.d-block.w-100 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* ===== 高级黑金导航 ===== */
+.navbar-elite .navbar { background:#000; }
+.navbar-elite .navbar-brand .tracking-wide { letter-spacing:.5px; }
+
+.elite-link{
+  position:relative;
+  color:#d9c88f !important;        /* 金色文字 */
+  font-weight:600;
+  padding:.5rem .25rem;
+  transition:color .2s ease, opacity .2s ease;
+  opacity:.95;
+}
+.elite-link:hover,
+.elite-link:focus,
+.elite-link.active{
+  color:#ffe7a3 !important;        /* 悬停更亮 */
+  opacity:1;
+}
+/* 下划线动画（黑金版） */
+.elite-link::after{
+  content:"";
+  position:absolute; left:0; bottom:-6px;
+  width:0; height:2px;
+  background:linear-gradient(90deg,#bfa66b,#e9d99b);
+  transition:width .25s ease;
+  border-radius:2px;
+}
+.elite-link:hover::after,
+.elite-link.active::after{ width:100%; }
+
+/* 胶囊购买按钮 */
+.btn-elite{
+  color:#000; border:0; border-radius:999px;
+  padding:.5rem 1rem; font-weight:700;
+  background:linear-gradient(90deg,#fff,#f2f2f2);
+  box-shadow:0 8px 20px rgba(255,255,255,.08), inset 0 0 0 1px rgba(255,255,255,.15);
+}
+.btn-elite:hover{ filter:brightness(1.05); }
+
+/* 底部分隔线：金属渐变 */
+.elite-sep{
+  height:3px;
+  background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.25),rgba(255,255,255,.08));
+}
+
+/* 滚动出现阴影（可选） */
+.navbar-elite .navbar{ transition: box-shadow .2s ease; }
+.navbar-elite.scrolled .navbar{ box-shadow:0 10px 30px rgba(0,0,0,.35); }
+@media (max-width: 991.98px){
+  .navbar-elite .navbar-nav .nav-link{ padding:.6rem 0; }
+  .btn-elite{ width:100%; margin-top:.5rem; }
+}
+
+/* ===== 页尾黑金风格 ===== */
+.footer-elite {
+  background: #000;
+  position: relative;
+}
+.footer-elite .brand-text {
+  font-family:'Montserrat',sans-serif;
+  font-size:1.4rem;
+  font-weight:800;
+  color:#d4af37;
+  text-shadow:1px 1px 2px #000,0 0 12px rgba(212,175,55,.6);
+  letter-spacing:.5px;
+}
+.footer-elite .footer-link {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  margin: 0 .25rem;
+}
+.footer-elite .footer-link:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* 社交图标 */
+.social-icon {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px; height:44px;
+  border-radius:50%;
+  background:#fff;
+  color:#000;
+  font-size:1.1rem;
+  transition: transform .2s ease, background .2s ease;
+}
+.social-icon:hover {
+  transform: translateY(-3px);
+  background:#d4af37;
+  color:#000;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position:absolute;
+  right:20px; bottom:20px;
+  width:42px; height:42px;
+  border-radius:50%;
+  background:#fff;
+  color:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  transition: background .2s ease, transform .2s ease;
+}
+.back-to-top:hover {
+  background:#d4af37;
+  transform: translateY(-3px);
+}
+
